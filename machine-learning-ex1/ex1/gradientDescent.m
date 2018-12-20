@@ -17,10 +17,10 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
-
-
-
-
+    m = size(X,1);
+    h = sum(X' .* theta)';
+    d_theta = alpha .* sum( (h - y).*X )' ./ m;
+    theta = theta - d_theta;
 
 
     % ============================================================
@@ -31,3 +31,4 @@ for iter = 1:num_iters
 end
 
 end
+% vim: sw=4:ts=4

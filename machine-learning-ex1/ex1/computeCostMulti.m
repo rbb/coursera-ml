@@ -17,6 +17,9 @@ h = sum(X' .* theta)';
 m = size(X,1);
 J = sum( (h - y).^2 )./ ( 2*m );
 
+%xtheta = (X' .* theta);
+%disp(['size(xtheta) = ', num2str(size(xtheta))]);
+%J = (xtheta' .* xtheta)./ (2*m)
 
 % =========================================================================
 

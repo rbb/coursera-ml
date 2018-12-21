@@ -7,6 +7,9 @@ function [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters
 m = length(y); % number of training examples
 J_history = zeros(num_iters, 1);
 
+disp(['size(X) = ', num2str(size(X))]);
+disp(['size(theta) = ', num2str(size(theta))]);
+
 for iter = 1:num_iters
 
     % ====================== YOUR CODE HERE ======================
@@ -18,13 +21,11 @@ for iter = 1:num_iters
     %
 
 
-
-
-
-
-
-
-
+    m = size(X,1);
+    h = sum(theta' .* X,2);
+    
+    d_theta = alpha .* sum( (h - y).*X )' ./ m;
+    theta = theta - d_theta;
 
 
     % ============================================================
@@ -35,3 +36,4 @@ for iter = 1:num_iters
 end
 
 end
+% vim: sw=4:ts=4

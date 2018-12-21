@@ -18,7 +18,7 @@ for iter = 1:num_iters
     %
 
     m = size(X,1);
-    h = sum(X' .* theta)';
+    h = sum(theta' .* X,2);
     d_theta = alpha .* sum( (h - y).*X )' ./ m;
     theta = theta - d_theta;
 

@@ -81,6 +81,35 @@ X = [ones(m, 1) X];
 
 fprintf('Running gradient descent ...\n');
 
+%------------------------------------------------
+% Optional: plot progress of different alphas
+figure(1);
+clf();
+hold on;
+alpha_list = [0.1 0.01 0.001];
+for alpha = alpha_list;
+   num_iters = 50;
+
+   % Init Theta and Run Gradient Descent 
+   theta = zeros(3, 1);
+   [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+
+   % Plot the convergence graph
+   %plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
+   plot(1:numel(J_history), J_history);
+   xlabel('Number of iterations');
+   ylabel('Cost J');
+
+   % Display gradient descent's result
+   fprintf('Theta computed from gradient descent: \n');
+   fprintf(' %f \n', theta);
+   fprintf('\n');
+end
+legend( num2str(alpha_list) );
+%fprintf('Program paused. Press enter to continue.\n');
+%pause;
+%----------------- End optional --------------------
+
 % Choose some alpha value
 alpha = 0.01;
 num_iters = 400;
@@ -90,7 +119,8 @@ theta = zeros(3, 1);
 [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
 
 % Plot the convergence graph
-figure;
+figure(1);
+clf(); % Added because of hold on in optional code
 plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
 xlabel('Number of iterations');
 ylabel('Cost J');

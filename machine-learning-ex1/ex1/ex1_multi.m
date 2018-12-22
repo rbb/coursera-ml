@@ -104,7 +104,11 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-price = 0; % You should change this
+%price = 0; % You should change this
+case1_vals = [1650, 3];
+case1_norm = (case1_vals .- mu) ./ sigma;
+case1_norm = [1, case1_norm]
+price = case1_norm *theta;
 
 
 % ============================================================

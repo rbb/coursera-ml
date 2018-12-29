@@ -18,7 +18,7 @@
 %
 
 %% Initialization
-clear ; close all; clc
+clear;
 
 %% Load Data
 %  The first two columns contains the X values and the third column
@@ -27,6 +27,7 @@ clear ; close all; clc
 data = load('ex2data2.txt');
 X = data(:, [1, 2]); y = data(:, 3);
 
+figure(3);
 plotData(X, y);
 
 % Put some labels
@@ -75,7 +76,7 @@ fprintf('Expected gradients (approx) - first five values only:\n');
 fprintf(' 0.0085\n 0.0188\n 0.0001\n 0.0503\n 0.0115\n');
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%pause;
 
 % Compute and display cost and gradient
 % with all-ones theta and lambda = 10
@@ -90,7 +91,7 @@ fprintf('Expected gradients (approx) - first five values only:\n');
 fprintf(' 0.3460\n 0.1614\n 0.1948\n 0.2269\n 0.0922\n');
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% ============= Part 2: Regularization and Accuracies =============
 %  Optional Exercise:

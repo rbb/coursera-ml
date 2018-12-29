@@ -17,7 +17,8 @@
 %
 
 %% Initialization
-clear ; close all; clc
+%clear ; close all; clc
+clear;
 
 %% Load Data
 %  The first two columns contains the exam scores and the third column
@@ -33,6 +34,7 @@ X = data(:, [1, 2]); y = data(:, 3);
 fprintf(['Plotting data with + indicating (y = 1) examples and o ' ...
          'indicating (y = 0) examples.\n']);
 
+figure(1);
 plotData(X, y);
 
 % Put some labels 
@@ -46,7 +48,7 @@ legend('Admitted', 'Not admitted')
 hold off;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%pause;
 
 
 %% ============ Part 2: Compute Cost and Gradient ============
@@ -62,6 +64,7 @@ X = [ones(m, 1) X];
 
 % Initialize fitting parameters
 initial_theta = zeros(n + 1, 1);
+theta = initial_theta;
 
 % Compute and display initial cost and gradient
 [cost, grad] = costFunction(initial_theta, X, y);
@@ -83,7 +86,7 @@ fprintf(' %f \n', grad);
 fprintf('Expected gradients (approx):\n 0.043\n 2.566\n 2.647\n');
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%pause;
 
 
 %% ============= Part 3: Optimizing using fminunc  =============
@@ -107,6 +110,7 @@ fprintf('Expected theta (approx):\n');
 fprintf(' -25.161\n 0.206\n 0.201\n');
 
 % Plot Boundary
+figure(2);
 plotDecisionBoundary(theta, X, y);
 
 % Put some labels 
@@ -120,7 +124,7 @@ legend('Admitted', 'Not admitted')
 hold off;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% ============== Part 4: Predict and Accuracies ==============
 %  After learning the parameters, you'll like to use it to predict the outcomes

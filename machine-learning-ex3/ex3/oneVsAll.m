@@ -48,8 +48,28 @@ X = [ones(m, 1) X];
 %         fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)), ...
 %                 initial_theta, options);
 %
+size(all_theta)
+for c = 1:num_labels
+   disp(['========================================'])
+   fprintf('Processing label %d\n', c);
+
+   % Set Initial theta
+   initial_theta = zeros(n + 1, 1);
+
+   % Set options for fminunc
+   options = optimset('GradObj', 'on', 'MaxIter', 20);
+
+   % Run fmincg to obtain the optimal theta
+   % This function will return theta and the cost
+   %[theta] = ...
+   [theta, fX, num_it] = ...
+       fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)), ...
+               initial_theta, options);
+   all_theta(c,:) = theta';
+   %disp(['size(theta) = ' num2str(size(theta))]);
 
 
+end
 
 
 

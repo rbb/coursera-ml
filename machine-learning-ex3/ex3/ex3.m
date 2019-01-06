@@ -1,5 +1,7 @@
 %% Machine Learning Online Class - Exercise 3 | Part 1: One-vs-all
 
+%graphics_toolkit ('gnuplot')
+
 %  Instructions
 %  ------------
 %
@@ -17,7 +19,7 @@
 %
 
 %% Initialization
-clear ; close all; clc
+clear ;
 
 %% Setup the parameters you will use for this part of the exercise
 input_layer_size  = 400;  % 20x20 Input Images of Digits
@@ -33,16 +35,18 @@ num_labels = 10;          % 10 labels, from 1 to 10
 fprintf('Loading and Visualizing Data ...\n')
 
 load('ex3data1.mat'); % training data stored in arrays X, y
-m = size(X, 1);
+m = size(X, 1)
 
 % Randomly select 100 data points to display
 rand_indices = randperm(m);
 sel = X(rand_indices(1:100), :);
 
+figure(1);
+clf();
 displayData(sel);
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% ============ Part 2a: Vectorize Logistic Regression ============
 %  In this part of the exercise, you will reuse your logistic regression
@@ -69,7 +73,7 @@ fprintf('Expected gradients:\n');
 fprintf(' 0.146561\n -0.548558\n 0.724722\n 1.398003\n');
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 %% ============ Part 2b: One-vs-All Training ============
 fprintf('\nTraining One-vs-All Logistic Regression...\n')
 
@@ -77,7 +81,7 @@ lambda = 0.1;
 [all_theta] = oneVsAll(X, y, num_labels, lambda);
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 
 %% ================ Part 3: Predict for One-Vs-All ================

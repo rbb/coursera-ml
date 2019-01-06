@@ -23,11 +23,11 @@ p = zeros(size(X, 1), 1);
 
 
 
-
-
-
-
-
+XpBias = [ones(m, 1) X];
+X1 = sigmoid(XpBias*Theta1');
+X1pBias = [ones(m, 1) X1];
+h = sigmoid(X1pBias*Theta2');
+[a, p] = max(h, [], 2);
 
 % =========================================================================
 

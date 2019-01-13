@@ -42,7 +42,6 @@ J = ( -y'*log(h) .-(1.-y')*log(1.-h) ) ./m;
 J = J +(lambda/2/m)*sum(theta(2:n).^2);
 grad = X'*(h-y)./m;
 grad(2:n) = grad(2:n) + (lambda/m)*theta(2:n);
-grad = grad(:);
 
 
 

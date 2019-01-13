@@ -115,25 +115,8 @@ Theta1_grad /= m;
 %               and Theta2_grad from Part 2.
 %
 
-
-
-%grad = X'*(h-y)./m;
-%grad(2:n) = grad(2:n) + (lambda/m)*theta(2:n);
-%grad = grad(:);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Theta1_grad(:, 2:end) += ((lambda/m) * Theta1(:, 2:end));
+Theta2_grad(:, 2:end) += ((lambda/m) * Theta2(:, 2:end));
 
 
 % -------------------------------------------------------------

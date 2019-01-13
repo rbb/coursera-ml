@@ -42,17 +42,18 @@ Theta2_grad = zeros(size(Theta2));
 %theta = nn_params;
 
 XpBias = [ones(m, 1) X];
-a2 = sigmoid(XpBias*Theta1');
+z2 = XpBias*Theta1'; % 5000x401 * (25x401)' = 5kx25
+a2 = sigmoid(z2);
 a2pBias = [ones(m, 1) a2];
-h = sigmoid(a2pBias*Theta2');
-%[a, p] = max(h, [], 2);
+z3 = a2pBias*Theta2';
+h = sigmoid(z3);
 
 yn = zeros(m, num_labels); % 10*5000
 for i=1:m,
   yn(i, y(i))=1;
 end
 J = sum ( sum ( -yn .* log(h) - (1-yn) .* log(1-h) )) ./m;
-Jreg = lambda * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2))) /2/m
+Jreg = lambda * (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2))) /2/m;
 J = J + Jreg;
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
@@ -69,6 +70,42 @@ J = J + Jreg;
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
+delta3 = zeros(m,num_labels);
+delta2 = zeros(m,hidden_layer_size);
+%dispv("h", h);
+%dispv("y", y);
+%dispv("a2", a2);
+%dispv("h(1,:)", h(1,:));
+%dispv("delta3", delta3);
+%dispv("a2pBias", a2pBias);
+%dispv("Theta1", Theta1);
+%dispv("Theta2", Theta2);
+%dispv("Theta2_grad", Theta2_grad);
+%dispv("z2", z2);           %5000 x 25
+z2pBias = [ones(m,1) z2];
+for t=1:m
+   a3 = h(t,:);
+
+   yk = zeros(1,num_labels);
+   yk(y(t)) = 1;
+
+   dt3 = a3 - yk;      % a3 = h
+   delta3(t,:) = dt3;
+   %      (10x26)'*(1x10)'                   1x26
+   dt2pBias = ( (Theta2' *dt3') .* sigmoidGradient(z2pBias(t,:)') )';
+   dt2 = dt2pBias(2:end);
+   delta2(t,:) = dt2;
+   
+   %                           (1x10)'*1x26
+   Theta2_grad = Theta2_grad + dt3' * a2pBias(t,:);
+   Theta1_grad = Theta1_grad + dt2' * XpBias(t,:);
+end
+Theta2_grad /= m;
+Theta1_grad /= m;
+
+%dispv("Theta2_grad", Theta2_grad);
+%dispv("Theta1_grad", Theta1_grad);
+
 %
 % Part 3: Implement regularization with the cost function and gradients.
 %
@@ -80,6 +117,9 @@ J = J + Jreg;
 
 
 
+%grad = X'*(h-y)./m;
+%grad(2:n) = grad(2:n) + (lambda/m)*theta(2:n);
+%grad = grad(:);
 
 
 

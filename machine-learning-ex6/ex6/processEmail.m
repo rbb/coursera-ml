@@ -96,13 +96,12 @@ while ~isempty(email_contents)
     % Note: You can use strcmp(str1, str2) to compare two strings (str1 and
     %       str2). It will return 1 only if the two strings are equivalent.
     %
+    
 
-
-
-
-
-
-
+    n = find(ismember(vocabList,str));
+    if n
+        word_indices = [word_indices; n];
+    end
 
 
 
@@ -123,3 +122,5 @@ end
 fprintf('\n\n=========================\n');
 
 end
+
+% vim: ts=4:sw=4

@@ -25,7 +25,42 @@ sigma = 0.3;
 
 
 
+%{
+%steps = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+%steps = [0.01, 1, 10];
+steps = [0.03, 0.1, 0.3, 1, 3, 10];
 
+merr = zeros(length(steps), length(steps));
+merrval = zeros(length(steps), length(steps));
+%models = zeros(length(steps), length(steps));
+models = {};
+for Cn = 1:length(steps)
+   for Sn = 1:length(steps)
+      C = steps(Cn);
+      sigma = steps(Sn);
+      model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
+
+      pred = svmPredict(model,X);
+      merr(Cn, Sn) = mean(double(pred ~= y));
+
+      predval = svmPredict(model,Xval);
+      merrval(Cn, Sn) = mean(double(predval ~= yval));
+
+      models{Cn,Sn} = model;
+   end
+end
+
+[Sv,Sin] = min(merrval)
+[Cv,Cin] = min(Sv)
+
+[v,ind]=min(merrval(:));
+[min_row,min_col]=ind2sub(size(merrval),ind);
+C = steps(min_row)
+sigma = steps(min_col)
+model = models{min_row, min_col};
+%}
+C = 1;
+sigma = 0.1;
 
 
 

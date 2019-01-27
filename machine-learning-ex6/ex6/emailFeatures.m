@@ -48,8 +48,7 @@ x = zeros(n, 1);
 %
 %
 
-
-
+x = sum([1:n]==unique(word_indices(:)));
 
 
 

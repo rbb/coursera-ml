@@ -20,8 +20,13 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
-
-
+j = zeros(size(X,1), size(centroids,1));
+for nx = 1:size(X,1)
+   for k = 1:size(centroids,1)
+      j(nx,k) = norm( X(nx,:) - centroids(k,:) ).^2;
+   end
+end
+[j, idx] = min(j, [], 2);
 
 
 

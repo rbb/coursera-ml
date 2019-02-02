@@ -19,7 +19,7 @@
 %
 
 %% Initialization
-clear ; close all; clc
+clear ; %close all; clc
 
 %% ================= Part 1: Find Closest Centroids ====================
 %  To help you implement K-Means, we have divided the learning algorithm 
@@ -44,7 +44,7 @@ fprintf(' %d', idx(1:3));
 fprintf('\n(the closest centroids should be 1, 3, 2 respectively)\n');
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% ===================== Part 2: Compute Means =========================
 %  After implementing the closest centroids function, you should now
@@ -63,8 +63,7 @@ fprintf('   [ 5.813503 2.633656 ]\n');
 fprintf('   [ 7.119387 3.616684 ]\n\n');
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
-
+%pause;
 
 %% =================== Part 3: K-Means Clustering ======================
 %  After you have completed the two functions computeCentroids and
@@ -93,7 +92,7 @@ initial_centroids = [3 3; 6 2; 8 5];
 fprintf('\nK-Means Done.\n\n');
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% ============= Part 4: K-Means Clustering on Pixels ===============
 %  In this exercise, you will use K-Means to compress an image. To do this,
@@ -123,7 +122,7 @@ X = reshape(A, img_size(1) * img_size(2), 3);
 
 % Run your K-Means algorithm on this data
 % You should try different values of K and max_iters here
-K = 16; 
+K = 16;
 max_iters = 10;
 
 % When using K-Means, it is important the initialize the centroids
@@ -135,7 +134,7 @@ initial_centroids = kMeansInitCentroids(X, K);
 [centroids, idx] = runkMeans(X, initial_centroids, max_iters);
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 
 %% ================= Part 5: Image Compression ======================
@@ -158,6 +157,7 @@ X_recovered = centroids(idx,:);
 % Reshape the recovered image into proper dimensions
 X_recovered = reshape(X_recovered, img_size(1), img_size(2), 3);
 
+%figure(2);
 % Display the original image 
 subplot(1, 2, 1);
 imagesc(A); 
@@ -170,5 +170,5 @@ title(sprintf('Compressed, with %d colors.', K));
 
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 

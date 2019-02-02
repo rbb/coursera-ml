@@ -28,7 +28,19 @@ centroids = zeros(K, n);
 
 centroids = zeros(K,size(X,2));
 for k = 1:K
-   centroids(k,:) = mean( X(find(idx == k),:) );
+   cm = mean( X(find(idx == k),:) );
+   if isempty(cm)
+      %disp(['k = ', num2str(k), "\tsize(cm) = ", num2str(size(cm))]);
+      %cm = mean(X);
+      %disp('Empty cluster, using mean of all values');
+      rm = round(rand()*m);
+      disp(['Empty cluster k = ', num2str(k), ', using random data point ', num2str(rm)]);
+      cm = X(rm,:);
+      %TODO: Try the farthest point from the largest cluster instead of a random point
+      %TODO: match kmeans() singleton: Try the point with the highest error
+   end
+      
+   centroids(k,:) = cm;
 end
 
 
